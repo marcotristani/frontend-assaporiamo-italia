@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useMainContext } from "../contexts/MainContext";
 const endpoint = import.meta.env.VITE_API_URL_BASE;
 
 function MappaItalia({ onRegioneClick }) {
+  const { setIsLoading } = useMainContext();
   //variabile dove salvo lista regioni
   const [regioni, setRegioni] = useState([]);
 
@@ -10,6 +12,8 @@ function MappaItalia({ onRegioneClick }) {
   const [selezionaRegione, setSelezionaRegione] = useState(null);
 
   function fetchRegioni() {
+    //attivo loader
+    setIsLoading(true);
     //chiamata
     axios
       .get(`${endpoint}api/regioni`)
@@ -19,7 +23,11 @@ function MappaItalia({ onRegioneClick }) {
       .catch((err) => {
         console.log("Regioni non trovate", err);
       })
-      .finally();
+      .finally(
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 5000),
+      );
   }
 
   //eseguo la chiamata all'inizio per caricare tutte le regioni
