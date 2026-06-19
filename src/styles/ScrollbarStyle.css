@@ -1,0 +1,27 @@
+/* Definiamo l'aspetto della barra per i browser moderni (Chrome, Safari, Edge) */
+.scrollbar-stile::-webkit-scrollbar {
+  height: 6px; /* Spessore della barra orizzontale: molto sottile ed elegante */
+}
+
+/* Il binario di fondo (la traccia dove scorre la maniglia) */
+.scrollbar-stile::-webkit-scrollbar-track {
+  background: #f1f5f9; /* Un grigio chiarissimo (Slate 100 di Tailwind) */
+  border-radius: 100px; /* Angoli completamente arrotondati */
+}
+
+/* La maniglia (la parte che l'utente trascina) */
+.scrollbar-stile::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Un grigio morbido (Slate 300 di Tailwind) */
+  border-radius: 100px;
+}
+
+/* Cambia colore quando l'utente ci passa sopra con il mouse */
+.scrollbar-stile::-webkit-scrollbar-thumb:hover {
+  background: #ea580c; /* Diventa arancione vivo (Orange 600) per richiamare il tuo tema */
+}
+
+/* Supporto standard nativo per Firefox (gestisce solo spessore e colori base) */
+.scrollbar-stile {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
