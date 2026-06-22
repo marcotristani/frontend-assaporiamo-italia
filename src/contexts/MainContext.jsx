@@ -1,7 +1,8 @@
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 import axios from "axios";
 
 import Loader from "../components/Loader";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MainContext = createContext();
 
@@ -23,12 +24,42 @@ export function MainProvider({ children }) {
       .catch((err) => {
         console.log("Regioni non trovate", err);
       })
-      .finally(
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500),
-      );
+      .finally(setIsLoading(false));
   }
+
+  const location = useLocation();
+
+  const queryAttuali = new URLSearchParams(location.search);
+  const categoriaSlug = queryAttuali.get("categoria");
+
+  const querySenzaCategoria = new URLSearchParams(location.search);
+  querySenzaCategoria.delete("categoria");
+  const stringaQueryRimanenti = querySenzaCategoria.toString()
+    ? `?${querySenzaCategoria.toString()}`
+    : "";
+
+  const navigate = useNavigate();
+  const [isOrdinato, setIsOrdinato] = useState(false);
+
+  // Sincronizziamo lo stato ogni volta che l'URL nel browser cambia
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    setIsOrdinato(query.get("order") === "alfabetico");
+  }, [location.search]);
+
+  // 2. La funzione che viene scatenata al click del BottoneOrdinamento
+  const gestisciOrdinamento = () => {
+    const query = new URLSearchParams(location.search);
+
+    if (query.get("order") === "alfabetico") {
+      query.delete("order"); // Se c'è già, lo toglie (Toggle)
+    } else {
+      query.set("order", "alfabetico"); // Se non c'è, lo aggiunge
+    }
+
+    // Spinge il nuovo URL nel browser mantenendo intatti gli altri filtri (ricerca, categoria)
+    navigate(`${location.pathname}?${query.toString()}`);
+  };
 
   return (
     // passo products con array dei prodotti e search per ricerca
@@ -37,6 +68,10 @@ export function MainProvider({ children }) {
         isLoading,
         setIsLoading,
         fetchResponse,
+        isOrdinato,
+        categoriaSlug,
+        stringaQueryRimanenti,
+        gestisciOrdinamento,
       }}
     >
       {children}
