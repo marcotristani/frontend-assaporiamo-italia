@@ -10,6 +10,8 @@ import DettaglioProdottoPage from "./pages/DettaglioProdottoPage";
 import BaseLayout from "./layouts/BaseLayout";
 import ListaViniiLayout from "./layouts/ListaViniLayout";
 import TuttiVini from "./pages/TuttiVini";
+import ViniRegione from "./pages/ViniRegione";
+import DettaglioVinoPage from "./pages/DettaglioVinoPage";
 
 export default function App() {
   return (
@@ -24,6 +26,10 @@ export default function App() {
                 path="/prodotti/dettaglio/:slugProdotto"
                 element={<DettaglioProdottoPage />}
               />
+              <Route
+                path="/vini/dettaglio/:slugVino"
+                element={<DettaglioVinoPage />}
+              />
             </Route>
             <Route element={<ListaProdottiLayout />}>
               <Route
@@ -34,6 +40,10 @@ export default function App() {
             </Route>
             <Route element={<ListaViniiLayout />}>
               <Route path="/vini/all" element={<TuttiVini />} />
+              <Route
+                path="/vini/regione/:slugRegione"
+                element={<ViniRegione />}
+              />
             </Route>
           </Route>
         </Routes>
