@@ -6,7 +6,7 @@ import RegioneDetail from "./pages/RegioneDetail";
 import ProdottiRegione from "./pages/ProdottiRegione";
 import ListaProdottiLayout from "./layouts/ListaProdottiLayout";
 import TuttiProdotti from "./pages/TuttiProdotti";
-import DettaglioProdotto from "./pages/DettaglioProdotto";
+import DettaglioProdottoPage from "./pages/DettaglioProdottoPage";
 
 export default function App() {
   return (
@@ -18,7 +18,7 @@ export default function App() {
             <Route path="/regione/:slugRegione" element={<RegioneDetail />} />
             <Route
               path="/prodotti/dettaglio/:slugProdotto"
-              element={<DettaglioProdotto />}
+              element={<DettaglioProdottoPage />}
             />
             <Route element={<ListaProdottiLayout />}>
               <Route

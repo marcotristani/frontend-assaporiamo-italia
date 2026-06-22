@@ -1,6 +1,3 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useMainContext } from "../contexts/MainContext";
 import {
   ArrowLeft,
   ShoppingBag,
@@ -9,31 +6,14 @@ import {
   LayoutGrid,
   Sparkles,
 } from "lucide-react";
-import SliderProdotti from "../components/SliderProdotti";
+import BottoneIndietro from "../components/BottoneIndietro";
+import BottoneTuttiProdotti from "../components/BottoneTuttiProdotti";
 
-function DettaglioProdotto() {
-  const { slugProdotto } = useParams();
-  const navigate = useNavigate();
-  const { fetchResponse } = useMainContext();
-
-  const [prodotto, setProdotto] = useState({});
-  const [viniCorrelati, setViniCorrelati] = useState([]);
-
-  const fineEndpointDettaglio = `api/prodotti/${slugProdotto}`;
-  const fineEndpointViniCorrelati = `api/vini/prodotto/${slugProdotto}`;
-
-  useEffect(() => {
-    fetchResponse(fineEndpointDettaglio, setProdotto);
-    fetchResponse(fineEndpointViniCorrelati, setViniCorrelati);
-  }, [slugProdotto]);
-
+function DettaglioProdotto({ prodotto }) {
   const { nome, descrizione, urlImmagine, linkStore } = prodotto;
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pb-20 relative overflow-hidden">
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 -right-32 w-96 h-96 bg-orange-100/40 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="min-h-screen bg-slate-50 text-slate-800  relative overflow-hidden">
       <header className="relative w-full h-[55vh] md:h-[65vh] flex items-center justify-center overflow-hidden shadow-sm">
         <img
           src={urlImmagine}
@@ -44,21 +24,8 @@ function DettaglioProdotto() {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-black/20 backdrop-blur-[1.5px]" />
 
         <div className="absolute top-6 left-4 md:left-8 z-20 flex items-center gap-3">
-          <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 bg-white/90 hover:bg-white hover:text-amber-800 backdrop-blur-sm transition-all duration-200 shadow-sm border border-slate-200/50 hover:border-amber-200/50 active:scale-95"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">Indietro</span>
-          </button>
-
-          <Link
-            to="/prodotti/all"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-amber-900 bg-amber-50/90 hover:bg-amber-100 hover:text-amber-950 backdrop-blur-sm transition-all duration-200 shadow-sm border border-amber-200/40 active:scale-95"
-          >
-            <LayoutGrid className="h-4 w-4 text-amber-700" />
-            <span>Tutti i prodotti</span>
-          </Link>
+          <BottoneIndietro />
+          <BottoneTuttiProdotti tipoProdotti={"prodotti"} />
         </div>
 
         <div className="relative z-10 text-center text-white max-w-4xl px-6 space-y-3">
@@ -107,20 +74,7 @@ function DettaglioProdotto() {
           </div>
         </div>
       </main>
-
-      {viniCorrelati && viniCorrelati.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 md:px-8 pt-6 border-t border-slate-200/60">
-          <SliderProdotti
-            listaProdotti={viniCorrelati}
-            titoloSezione="Vini Correlati"
-            descrizioneSezione="I migliori vini da abbinare a questo prodotto"
-            scrittaLink="Vedi tutti i vini"
-            urlLink="/vini/all"
-          />
-        </section>
-      )}
     </div>
   );
 }
-
 export default DettaglioProdotto;

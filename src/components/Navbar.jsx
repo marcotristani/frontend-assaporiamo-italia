@@ -10,6 +10,7 @@ import {
   Dialog,
   DialogPanel,
 } from "@headlessui/react";
+import BottoneHome from "./BottoneHome";
 
 function Navbar({ tipoProdotto }) {
   const { fetchResponse } = useMainContext();
@@ -69,12 +70,7 @@ function Navbar({ tipoProdotto }) {
       <nav className="sticky top-0 z-50 w-full border-b border-orange-100/50 bg-white/80 backdrop-blur-md shadow-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:px-8 gap-4">
           <div className="flex shrink-0">
-            <Link
-              to="/"
-              className="p-2.5 rounded-xl border border-slate-100 bg-white text-slate-700 hover:text-amber-700 shadow-sm hover:shadow transition-all duration-200"
-            >
-              <Home className="h-5 w-5 text-amber-600" />
-            </Link>
+            <BottoneHome />
           </div>
 
           <div className="flex flex-1 justify-start md:justify-center">
