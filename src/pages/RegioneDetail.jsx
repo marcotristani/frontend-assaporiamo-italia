@@ -9,7 +9,7 @@ import { ChevronRight } from "lucide-react";
 function RegioneDetail() {
   const { slugRegione } = useParams();
 
-  const { setIsLoading, fetchResponse } = useMainContext();
+  const { fetchResponse } = useMainContext();
 
   const endpointRegioneDetail = `api/regioni/${slugRegione}`;
   const [regioneDetail, setRegioneDetail] = useState({});
@@ -52,53 +52,21 @@ function RegioneDetail() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 md:px-8 mt-12 md:mt-16 space-y-16">
-        <section className="bg-white/40 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-orange-100/50 shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-orange-100 pb-4">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-800 capitalize">
-                Prodotti Tipici
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                Le eccellenze gastronomiche di questa terra.
-              </p>
-            </div>
-            <Link
-              to={`/prodotti/regione/${slugRegione}`}
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-medium text-amber-900 bg-amber-100 hover:bg-amber-200 transition-colors duration-200 shadow-sm hover:shadow group"
-            >
-              Vedi tutti i prodotti
-              <ChevronRight className="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+        <SliderProdotti
+          listaProdotti={prodottiTipici}
+          titoloSezione="Prodotti Tipici"
+          descrizioneSezione="Le eccellenze gastronomiche di questa terra."
+          scrittaLink="Vedi tutti i prodotti"
+          urlLink={`/prodotti/regione/${slugRegione}`}
+        />
 
-          <div className="w-full">
-            <SliderProdotti listaProdotti={prodottiTipici} />
-          </div>
-        </section>
-
-        <section className="bg-white/40 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-amber-100/50 shadow-sm space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-amber-100 pb-4">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-serif font-bold text-slate-800 capitalize">
-                I Vini
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                Vittigni storici e cantine d'eccellenza.
-              </p>
-            </div>
-            <Link
-              to={`/vini/regione/${slugRegione}`}
-              className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-medium text-white bg-amber-700 hover:bg-amber-800 transition-colors duration-200 shadow-sm hover:shadow group"
-            >
-              Vedi tutti i vini
-              <ChevronRight className="h-4 w-4 ml-1.5 transform group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-          <div className="w-full">
-            <SliderProdotti listaProdotti={vini} />
-          </div>
-        </section>
+        <SliderProdotti
+          listaProdotti={prodottiTipici}
+          titoloSezione="I Vini"
+          descrizioneSezione="Vitigni storici e cantine d'eccellenza."
+          scrittaLink="Vedi tutti i vini"
+          urlLink={`/vini/regione/${slugRegione}`}
+        />
       </main>
     </div>
   );
