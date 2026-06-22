@@ -23,9 +23,7 @@ export function MainProvider({ children }) {
 
   function fetchResponse(fineEndpoint, setter) {
     setIsLoading(true);
-
-    // Assicuriamoci che non ci siano doppi slash o slash mancanti
-    const urlCompleto = `${endpointBase.replace(/\/$/, "")}/${fineEndpoint.replace(/^\//, "")}`;
+    const urlCompleto = `${endpointBase}${fineEndpoint}`;
 
     axios
       .get(urlCompleto)
@@ -36,7 +34,6 @@ export function MainProvider({ children }) {
         console.error("Errore nel caricamento dati:", err);
       })
       .finally(() => {
-        // CORRETTO: Inserita la funzione freccia obbligatoria per far funzionare il loader
         setIsLoading(false);
       });
   }

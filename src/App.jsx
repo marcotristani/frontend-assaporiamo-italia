@@ -8,6 +8,8 @@ import ListaProdottiLayout from "./layouts/ListaProdottiLayout";
 import TuttiProdotti from "./pages/TuttiProdotti";
 import DettaglioProdottoPage from "./pages/DettaglioProdottoPage";
 import BaseLayout from "./layouts/BaseLayout";
+import ListaViniiLayout from "./layouts/ListaViniLayout";
+import TuttiVini from "./pages/TuttiVini";
 
 export default function App() {
   return (
@@ -29,6 +31,9 @@ export default function App() {
                 element={<ProdottiRegione />}
               />
               <Route path="/prodotti/all" element={<TuttiProdotti />} />
+            </Route>
+            <Route element={<ListaViniiLayout />}>
+              <Route path="/vini/all" element={<TuttiVini />} />
             </Route>
           </Route>
         </Routes>
