@@ -21,8 +21,6 @@ function DettaglioProdotto({ prodotto }) {
           className="absolute inset-0 w-full h-full object-cover transform scale-100 transition-transform duration-700 hover:scale-105"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-black/20 backdrop-blur-[1.5px]" />
-
         <div className="absolute top-6 left-4 md:left-8 z-20 flex items-center gap-3">
           <BottoneIndietro />
           <BottoneTuttiProdotti tipoProdotti={"prodotti"} />

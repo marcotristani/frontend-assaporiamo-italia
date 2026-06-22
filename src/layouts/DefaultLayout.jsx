@@ -2,6 +2,7 @@ import { Outlet, Link } from "react-router-dom"; // Aggiunto Link per l'eventual
 import { useMainContext } from "../contexts/MainContext";
 import "../styles/LoaderStyle.css";
 import Loader from "../components/Loader";
+import NavbarBase from "../components/NavbarBase";
 
 function DefaultLayout() {
   const { isLoading } = useMainContext();

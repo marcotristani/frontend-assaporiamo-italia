@@ -5,6 +5,7 @@ import { useMainContext } from "../contexts/MainContext";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ChevronRight } from "lucide-react";
+import BottoneIndietro from "../components/BottoneIndietro";
 
 function RegioneDetail() {
   const { slugRegione } = useParams();
@@ -30,6 +31,9 @@ function RegioneDetail() {
   const { nome, descrizione, urlImmagine } = regioneDetail;
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50/60 via-orange-50/30 to-slate-100 pb-16 relative overflow-hidden">
+      <div className="absolute top-6 left-4 md:left-8 z-20 flex items-center gap-3">
+        <BottoneIndietro />
+      </div>
       <header className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden shadow-lg">
         <img
           src={urlImmagine}

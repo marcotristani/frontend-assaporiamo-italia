@@ -157,7 +157,6 @@ function Navbar({ tipoProdotto }) {
             </ul>
           </div>
 
-          {/* LATO DESTRO: BARRA SU DESKTOP / SOLO ICONA SU MOBILE */}
           <div className="flex shrink-0 items-center justify-end">
             <button
               onClick={() => setIsCercaOpen(true)}
@@ -166,7 +165,6 @@ function Navbar({ tipoProdotto }) {
               <Search className="h-5 w-5 text-slate-500" />
             </button>
 
-            {/* Input Fisso Tradizionale Desktop (Nascosto su Mobile con 'hidden md:block') */}
             <div className="hidden md:block relative w-56">
               <input
                 type="text"
@@ -191,7 +189,6 @@ function Navbar({ tipoProdotto }) {
         </div>
       </nav>
 
-      {/* MODALE DI RICERCA SCHERMI MOBILE (HEADLESS UI DIALOG) */}
       <Dialog
         open={isCercaOpen}
         onClose={() => setIsCercaOpen(false)}
@@ -212,7 +209,6 @@ function Navbar({ tipoProdotto }) {
                 placeholder="Digita per cercare prodotti..."
                 value={valoreRicerca}
                 onChange={gestisciCambioRicerca}
-                autoFocus // Evita all'utente di dover cliccare nuovamente sull'input
                 className="w-full rounded-xl border border-slate-200 bg-slate-50/50 py-2.5 pl-10 pr-10 text-sm text-slate-800 outline-none focus:border-amber-500 focus:bg-white focus:ring-2 focus:ring-amber-100"
               />
 

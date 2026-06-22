@@ -7,6 +7,7 @@ import ProdottiRegione from "./pages/ProdottiRegione";
 import ListaProdottiLayout from "./layouts/ListaProdottiLayout";
 import TuttiProdotti from "./pages/TuttiProdotti";
 import DettaglioProdottoPage from "./pages/DettaglioProdottoPage";
+import BaseLayout from "./layouts/BaseLayout";
 
 export default function App() {
   return (
@@ -15,11 +16,13 @@ export default function App() {
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Homepage />} />
-            <Route path="/regione/:slugRegione" element={<RegioneDetail />} />
-            <Route
-              path="/prodotti/dettaglio/:slugProdotto"
-              element={<DettaglioProdottoPage />}
-            />
+            <Route element={<BaseLayout />}>
+              <Route path="/regione/:slugRegione" element={<RegioneDetail />} />
+              <Route
+                path="/prodotti/dettaglio/:slugProdotto"
+                element={<DettaglioProdottoPage />}
+              />
+            </Route>
             <Route element={<ListaProdottiLayout />}>
               <Route
                 path="/prodotti/regione/:slugRegione"
