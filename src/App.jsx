@@ -5,6 +5,7 @@ import DefaultLayout from "./layouts/DefaultLayout";
 import RegioneDetail from "./pages/RegioneDetail";
 import ProdottiRegione from "./pages/ProdottiRegione";
 import ListaProdottiLayout from "./layouts/ListaProdottiLayout";
+import TuttiProdotti from "./pages/TuttiProdotti";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
                 path="/prodotti/regione/:slugRegione"
                 element={<ProdottiRegione />}
               />
+              <Route path="/prodotti/all" element={<TuttiProdotti />} />
             </Route>
           </Route>
         </Routes>
