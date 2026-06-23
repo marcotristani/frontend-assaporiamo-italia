@@ -34,6 +34,13 @@ export function MainProvider({ children }) {
       })
       .catch((err) => {
         console.error("Errore nel caricamento dati:", err);
+        if (err.response) {
+          if (err.response.status === 404) {
+            return navigate("/not-found");
+          }
+        }
+
+        navigate("/error-system");
       })
       .finally(() => {
         setIsLoading(false);

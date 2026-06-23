@@ -12,6 +12,8 @@ import ListaViniiLayout from "./layouts/ListaViniLayout";
 import TuttiVini from "./pages/TuttiVini";
 import ViniRegione from "./pages/ViniRegione";
 import DettaglioVinoPage from "./pages/DettaglioVinoPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import ErroreSistemaPage from "./pages/ErroreSistemaPage";
 
 export default function App() {
   return (
@@ -46,6 +48,8 @@ export default function App() {
               />
             </Route>
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/error-system" element={<ErroreSistemaPage />} />
         </Routes>
       </MainProvider>
     </BrowserRouter>
