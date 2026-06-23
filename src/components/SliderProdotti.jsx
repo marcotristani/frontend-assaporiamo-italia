@@ -10,6 +10,7 @@ function SliderProdotti({
   descrizioneSezione,
   scrittaLink,
   urlLink,
+  tipoProdotto,
 }) {
   return (
     <section className="bg-white/40 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-orange-100/50 shadow-sm space-y-6">
@@ -38,7 +39,10 @@ function SliderProdotti({
                   key={prodotto.id}
                   className="flex-none pl-4 w-full sm:w-1/2 lg:w-1/4 xl:w-1/5 min-w-[250px] max-w-[300px] snap-start scroll-mt-6"
                 >
-                  <CardProdotto prodotto={prodotto} />
+                  <CardProdotto
+                    prodotto={prodotto}
+                    tipoProdotto={tipoProdotto}
+                  />
                 </div>
               );
             })}

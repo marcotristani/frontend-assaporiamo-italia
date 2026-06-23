@@ -9,7 +9,7 @@ import DettaglioProdotto from "../components/DettaglioProdotto";
 function DettaglioVinoPage() {
   const { slugVino } = useParams();
   const navigate = useNavigate();
-  const { fetchResponse } = useMainContext();
+  const { fetchResponse, setTipoProdottoCorrente } = useMainContext();
 
   const [vino, setVino] = useState({});
   const [prodottiCorrelati, setProdottiCorrelati] = useState([]);
@@ -20,6 +20,7 @@ function DettaglioVinoPage() {
   useEffect(() => {
     fetchResponse(fineEndpointDettaglio, setVino);
     fetchResponse(fineEndpointProdottiCorrelati, setProdottiCorrelati);
+    setTipoProdottoCorrente("vino");
   }, [slugVino]);
 
   return (
@@ -34,6 +35,7 @@ function DettaglioVinoPage() {
               descrizioneSezione="I migliori prodotti da degustare con questo vino"
               scrittaLink="Vedi tutti i prodotti tipici"
               urlLink="/prodotti/all"
+              tipoProdotto={"prodotto"}
             />
           </section>
         )}

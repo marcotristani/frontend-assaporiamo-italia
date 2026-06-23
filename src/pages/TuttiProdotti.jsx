@@ -5,8 +5,13 @@ import BottoneOrdinamento from "../components/BottoneOrdinamento";
 import BottoneIndietro from "../components/BottoneIndietro";
 
 function TuttiProdotti() {
-  const { fetchResponse, stringaQueryRimanenti, categoriaSlug } =
-    useMainContext();
+  const {
+    fetchResponse,
+    stringaQueryRimanenti,
+    categoriaSlug,
+    tipoProdottoCorrente,
+    setTipoProdottoCorrente,
+  } = useMainContext();
   const [prodottiTipici, setProdottiTipici] = useState([]);
 
   let fineEndpointProdotti = "";
@@ -18,6 +23,7 @@ function TuttiProdotti() {
 
   useEffect(() => {
     fetchResponse(fineEndpointProdotti, setProdottiTipici);
+    setTipoProdottoCorrente("prodotto");
   }, [fineEndpointProdotti]);
 
   return (
@@ -44,7 +50,11 @@ function TuttiProdotti() {
         {prodottiTipici.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {prodottiTipici.map((prodotto) => (
-              <CardProdotto key={prodotto.id} prodotto={prodotto} />
+              <CardProdotto
+                key={prodotto.id}
+                prodotto={prodotto}
+                tipoProdotto={tipoProdottoCorrente}
+              />
             ))}
           </div>
         ) : (

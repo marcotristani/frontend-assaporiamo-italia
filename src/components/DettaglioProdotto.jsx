@@ -8,9 +8,14 @@ import {
 } from "lucide-react";
 import BottoneIndietro from "../components/BottoneIndietro";
 import BottoneTuttiProdotti from "../components/BottoneTuttiProdotti";
+import { useMainContext } from "../contexts/MainContext";
+import { Award } from "lucide-react";
 
 function DettaglioProdotto({ prodotto }) {
-  const { nome, descrizione, urlImmagine, linkStore } = prodotto;
+  const { nome, descrizione, urlImmagine, linkStore, certificazione } =
+    prodotto;
+
+  const { tipoProdottoCorrente } = useMainContext();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800  relative overflow-hidden">
@@ -23,13 +28,21 @@ function DettaglioProdotto({ prodotto }) {
 
         <div className="absolute top-6 left-4 md:left-8 z-20 flex items-center gap-3">
           <BottoneIndietro />
-          <BottoneTuttiProdotti tipoProdotti={"prodotti"} />
+          {tipoProdottoCorrente === "vino" ? (
+            <BottoneTuttiProdotti tipoProdotti={"vini"} />
+          ) : (
+            <BottoneTuttiProdotti tipoProdotti={"prodotti"} />
+          )}
         </div>
 
         <div className="relative z-10 text-center text-white max-w-4xl px-6 space-y-3">
           <span className="inline-flex items-center gap-1.5 text-amber-400 font-semibold tracking-widest uppercase text-xs md:text-sm drop-shadow-sm">
             <Sparkles className="h-3.5 w-3.5" />
-            Eccellenza Gastronomica Italiana
+            Eccellenza{" "}
+            {tipoProdottoCorrente === "vino"
+              ? "Enologica"
+              : "Gastronomica"}{" "}
+            Italiana
           </span>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold tracking-tight leading-tight drop-shadow-md max-w-3xl mx-auto">
             {nome}
@@ -45,6 +58,12 @@ function DettaglioProdotto({ prodotto }) {
               alt={nome}
               className="max-h-full max-w-full object-contain rounded-xl transform transition-transform duration-500 group-hover:scale-105"
             />
+            {certificazione && (
+              <div className="absolute top-4 right-4 flex items-center gap-1 bg-amber-600 text-white px-3 py-1 rounded-xl text-xl font-bold tracking-wider shadow-md uppercase">
+                <Award className="h-10.5 w-10.5 text-amber-200" />
+                {certificazione}
+              </div>
+            )}
           </div>
 
           <div className="md:col-span-7 space-y-6 flex flex-col justify-center h-full">

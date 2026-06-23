@@ -1,10 +1,15 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useMainContext } from "../contexts/MainContext";
 
-function CardProdotto({ prodotto }) {
+function CardProdotto({ prodotto, tipoProdotto }) {
   return (
     <Link
-      to={`/prodotti/dettaglio/${prodotto.slug}`}
+      to={
+        tipoProdotto === "vino"
+          ? `/vini/dettaglio/${prodotto.slug}`
+          : `/prodotti/dettaglio/${prodotto.slug}`
+      }
       className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
     >
       <div className="relative aspect-video w-full overflow-hidden bg-slate-50">

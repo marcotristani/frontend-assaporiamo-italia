@@ -12,6 +12,8 @@ export function MainProvider({ children }) {
   const navigate = useNavigate();
   const [isOrdinato, setIsOrdinato] = useState(false);
 
+  const [tipoProdottoCorrente, setTipoProdottoCorrente] = useState("");
+
   const queryAttuali = new URLSearchParams(location.search);
   const categoriaSlug = queryAttuali.get("categoria") || "";
 
@@ -62,6 +64,8 @@ export function MainProvider({ children }) {
         setIsLoading,
         fetchResponse,
         isOrdinato,
+        tipoProdottoCorrente,
+        setTipoProdottoCorrente,
         categoriaSlug,
         stringaQueryRimanenti,
         gestisciOrdinamento,

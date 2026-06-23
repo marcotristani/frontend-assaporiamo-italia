@@ -62,14 +62,16 @@ function RegioneDetail() {
           descrizioneSezione="Le eccellenze gastronomiche di questa terra."
           scrittaLink="Vedi tutti i prodotti"
           urlLink={`/prodotti/regione/${slugRegione}`}
+          tipoProdotto={"prodotto"}
         />
 
         <SliderProdotti
-          listaProdotti={prodottiTipici}
+          listaProdotti={vini}
           titoloSezione="I Vini"
           descrizioneSezione="Vitigni storici e cantine d'eccellenza."
           scrittaLink="Vedi tutti i vini"
           urlLink={`/vini/regione/${slugRegione}`}
+          tipoProdotto={"vino"}
         />
       </main>
     </div>
