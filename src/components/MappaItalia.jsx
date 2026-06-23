@@ -18,14 +18,12 @@ function MappaItalia({ onRegioneClick }) {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Titolo con colori più accesi per contrastare lo sfondo */}
       <div className="h-12 text-2xl font-bold text-orange-500 mb-6 text-center tracking-wide drop-shadow-sm">
         {selezionaRegione
           ? `Assapora la Regione ${selezionaRegione}`
           : "Seleziona una regione sulla mappa"}
       </div>
 
-      {/* Contenitore di contrasto: sfondo scuro, angoli arrotondati, ombra profonda e padding */}
       <div className="w-full max-w-xl bg-slate-900 p-6 rounded-3xl shadow-2xl border border-slate-800 transition-all duration-300">
         <svg
           viewBox="0 0 1000 1000"
@@ -42,7 +40,6 @@ function MappaItalia({ onRegioneClick }) {
                 onMouseEnter={() => setSelezionaRegione(regione.nome)}
                 onMouseLeave={() => setSelezionaRegione(null)}
                 onClick={() => onRegioneClick(regione.slug)}
-                /* Modificati i colori: regioni di base chiare sul fondo scuro, arancione vivo al passaggio del mouse */
                 className="fill-slate-100 stroke-slate-900 stroke-[3] cursor-pointer transition-all duration-200 hover:fill-orange-500 hover:stroke-white"
               ></path>
             ))}
