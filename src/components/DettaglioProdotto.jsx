@@ -5,15 +5,25 @@ import {
   Info,
   LayoutGrid,
   Sparkles,
+  MapPin, // Icona per la Regione
+  Folder, // Icona per la Categoria
 } from "lucide-react";
 import BottoneIndietro from "../components/BottoneIndietro";
 import BottoneTuttiProdotti from "../components/BottoneTuttiProdotti";
 import { useMainContext } from "../contexts/MainContext";
 import { Award } from "lucide-react";
 
+// Estraiamo "regione" e "categoria" direttamente dalle props del prodotto
 function DettaglioProdotto({ prodotto }) {
-  const { nome, descrizione, urlImmagine, linkStore, certificazione } =
-    prodotto;
+  const {
+    nome,
+    descrizione,
+    urlImmagine,
+    linkStore,
+    certificazione,
+    regione,
+    categoria,
+  } = prodotto;
 
   const { tipoProdottoCorrente } = useMainContext();
 
@@ -70,6 +80,28 @@ function DettaglioProdotto({ prodotto }) {
             <div className="flex items-center gap-2 text-slate-800 font-serif font-bold text-xl md:text-2xl border-b border-slate-100 pb-4">
               <Info className="h-5 w-5 text-amber-600 shrink-0" />
               <h2>Informazioni </h2>
+            </div>
+
+            <div className="flex flex-wrap gap-4 text-xs font-medium text-slate-600">
+              <div className="flex items-center gap-1.5 bg-slate-100/80 border border-slate-200/40 px-3 py-1.5 rounded-xl">
+                <MapPin className="h-3.5 w-3.5 text-amber-600" />
+                <span>
+                  Regione:{" "}
+                  <strong className="text-slate-800 font-semibold">
+                    {regione}
+                  </strong>
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5 bg-slate-100/80 border border-slate-200/40 px-3 py-1.5 rounded-xl">
+                <Folder className="h-3.5 w-3.5 text-amber-600" />
+                <span>
+                  Categoria:{" "}
+                  <strong className="text-slate-800 font-semibold">
+                    {categoria}
+                  </strong>
+                </span>
+              </div>
             </div>
 
             <p className="text-base text-slate-600 font-light leading-relaxed tracking-wide">

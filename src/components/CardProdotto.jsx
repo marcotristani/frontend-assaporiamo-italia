@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Award } from "lucide-react"; // Aggiunta l'icona Award
 import { Link } from "react-router-dom";
 import { useMainContext } from "../contexts/MainContext";
 
@@ -17,8 +17,14 @@ function CardProdotto({ prodotto, tipoProdotto }) {
           src={prodotto.urlImmagine}
           alt={prodotto.nome}
           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
         />
+
+        {prodotto.certificazione && (
+          <div className="absolute top-3 right-3 flex items-center gap-1 bg-amber-600/90 backdrop-blur-sm text-white px-2.5 py-1 rounded-xl text-[10px] font-bold tracking-wider shadow-sm uppercase z-10">
+            <Award className="h-3 w-3 text-amber-200" />
+            <span>{prodotto.certificazione}</span>
+          </div>
+        )}
       </div>
 
       <div className="p-4 flex flex-col flex-grow justify-between space-y-3">
@@ -36,4 +42,5 @@ function CardProdotto({ prodotto, tipoProdotto }) {
     </Link>
   );
 }
+
 export default CardProdotto;
