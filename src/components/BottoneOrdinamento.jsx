@@ -1,8 +1,28 @@
 import { ArrowUpDown } from "lucide-react";
 import { useMainContext } from "../contexts/MainContext";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function BottoneOrdinamento() {
-  const { isOrdinato, gestisciOrdinamento } = useMainContext();
+  const navigate = useNavigate();
+  const [isOrdinato, setIsOrdinato] = useState(false);
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    setIsOrdinato(query.get("order") === "alfabetico");
+  }, [location.search]);
+
+  function gestisciOrdinamento() {
+    const query = new URLSearchParams(location.search);
+
+    if (query.get("order") === "alfabetico") {
+      query.delete("order");
+    } else {
+      query.set("order", "alfabetico");
+    }
+
+    navigate(`${location.pathname}?${query.toString()}`);
+  }
   return (
     <button
       onClick={gestisciOrdinamento}

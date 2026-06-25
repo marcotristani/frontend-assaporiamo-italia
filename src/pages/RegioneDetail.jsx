@@ -60,7 +60,7 @@ function RegioneDetail() {
           listaProdotti={prodottiTipici}
           titoloSezione="Prodotti Tipici"
           descrizioneSezione="Le eccellenze gastronomiche di questa terra."
-          scrittaLink="Vedi tutti i prodotti"
+          scrittaLink="Vedi tutti i prodotti della regione"
           urlLink={`/prodotti/regione/${slugRegione}`}
           tipoProdotto={"prodotto"}
         />
@@ -69,7 +69,7 @@ function RegioneDetail() {
           listaProdotti={vini}
           titoloSezione="I Vini"
           descrizioneSezione="Vitigni storici e cantine d'eccellenza."
-          scrittaLink="Vedi tutti i vini"
+          scrittaLink="Vedi tutti i vini della regione"
           urlLink={`/vini/regione/${slugRegione}`}
           tipoProdotto={"vino"}
         />

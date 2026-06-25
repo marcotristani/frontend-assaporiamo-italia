@@ -10,7 +10,6 @@ export function MainProvider({ children }) {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const [isOrdinato, setIsOrdinato] = useState(false);
 
   const [tipoProdottoCorrente, setTipoProdottoCorrente] = useState("");
 
@@ -47,35 +46,16 @@ export function MainProvider({ children }) {
       });
   }
 
-  useEffect(() => {
-    const query = new URLSearchParams(location.search);
-    setIsOrdinato(query.get("order") === "alfabetico");
-  }, [location.search]);
-
-  const gestisciOrdinamento = () => {
-    const query = new URLSearchParams(location.search);
-
-    if (query.get("order") === "alfabetico") {
-      query.delete("order");
-    } else {
-      query.set("order", "alfabetico");
-    }
-
-    navigate(`${location.pathname}?${query.toString()}`);
-  };
-
   return (
     <MainContext.Provider
       value={{
         isLoading,
         setIsLoading,
         fetchResponse,
-        isOrdinato,
         tipoProdottoCorrente,
         setTipoProdottoCorrente,
         categoriaSlug,
         stringaQueryRimanenti,
-        gestisciOrdinamento,
       }}
     >
       {children}
