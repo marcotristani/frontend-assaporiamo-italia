@@ -19,7 +19,7 @@ export function MainProvider({ children }) {
 
   const querySenzaCategoria = new URLSearchParams(location.search);
   querySenzaCategoria.delete("categoria");
-  const stringaQueryRimanenti = querySenzaCategoria.toString()
+  const stringaQueryRimanenti = querySenzaCategoria
     ? `?${querySenzaCategoria.toString()}`
     : "";
 

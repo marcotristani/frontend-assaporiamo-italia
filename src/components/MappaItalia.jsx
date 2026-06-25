@@ -8,7 +8,7 @@ function MappaItalia({ onRegioneClick }) {
   //variabile dove salvo lista regioni
   const [regioni, setRegioni] = useState([]);
 
-  //uso una variabile di stato per definire la regione selezionata
+  //uso una variabile di stato per definire la regione da selezionare
   const [selezionaRegione, setSelezionaRegione] = useState(null);
 
   //eseguo la chiamata all'inizio per caricare tutte le regioni

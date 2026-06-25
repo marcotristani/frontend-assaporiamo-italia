@@ -13,7 +13,7 @@ import {
 import BottoneHome from "./BottoneHome";
 
 function Navbar({ tipoProdotto }) {
-  const { fetchResponse } = useMainContext();
+  const { fetchResponse, categoriaSlug } = useMainContext();
   const { slugRegione } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,14 +31,16 @@ function Navbar({ tipoProdotto }) {
   }, []);
 
   const queryAttuali = new URLSearchParams(location.search);
-  const categoriaAttiva = queryAttuali.get("categoria") || "";
   const valoreRicerca = queryAttuali.get("ricerca") || "";
 
-  const nomeCategoriaAttiva =
-    categorie.find((categoria) => categoria.slug === categoriaAttiva)?.nome ||
-    "Tutte le categorie";
+  const categoriaTrovata = categorie.find(
+    (categoria) => categoria.slug === categoriaSlug,
+  );
+  const nomeCategoriaAttiva = categoriaTrovata
+    ? categoriaTrovata.nome
+    : "Tutte le categorie";
 
-  const gestisciCambioCategoria = (slugCategoria) => {
+  function gestisciCambioCategoria(slugCategoria) {
     const query = new URLSearchParams(location.search);
     if (slugCategoria === "tutte") {
       query.delete("categoria");
@@ -46,9 +48,9 @@ function Navbar({ tipoProdotto }) {
       query.set("categoria", slugCategoria);
     }
     navigate(`${location.pathname}?${query.toString()}`);
-  };
+  }
 
-  const gestisciCambioRicerca = (e) => {
+  function gestisciCambioRicerca(e) {
     const testo = e.target.value;
     const params = new URLSearchParams(location.search);
     if (testo) {
@@ -57,13 +59,13 @@ function Navbar({ tipoProdotto }) {
       params.delete("ricerca");
     }
     navigate(`${location.pathname}?${params.toString()}`);
-  };
+  }
 
-  const resettaRicerca = () => {
+  function resettaRicerca() {
     const query = new URLSearchParams(location.search);
     query.delete("ricerca");
     navigate(`${location.pathname}?${query.toString()}`);
-  };
+  }
 
   return (
     <>
@@ -91,13 +93,13 @@ function Navbar({ tipoProdotto }) {
                     <button
                       onClick={() => gestisciCambioCategoria("tutte")}
                       className={`flex w-full items-center justify-between px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
-                        categoriaAttiva === ""
+                        categoriaSlug === ""
                           ? "bg-amber-50 text-amber-900"
                           : "text-slate-700 hover:bg-slate-50"
                       }`}
                     >
                       <span>Tutte le categorie</span>
-                      {categoriaAttiva === "" && (
+                      {categoriaSlug === "" && (
                         <Check className="h-4 w-4 text-amber-600" />
                       )}
                     </button>
@@ -110,13 +112,13 @@ function Navbar({ tipoProdotto }) {
                       <button
                         onClick={() => gestisciCambioCategoria(categoria.slug)}
                         className={`flex w-full items-center justify-between px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
-                          categoriaAttiva === categoria.slug
+                          categoriaSlug === categoria.slug
                             ? "bg-amber-50 text-amber-900"
                             : "text-slate-700 hover:bg-slate-50"
                         }`}
                       >
                         <span className="truncate">{categoria.nome}</span>
-                        {categoriaAttiva === categoria.slug && (
+                        {categoriaSlug === categoria.slug && (
                           <Check className="h-4 w-4 text-amber-600" />
                         )}
                       </button>
@@ -131,7 +133,7 @@ function Navbar({ tipoProdotto }) {
                 <button
                   onClick={() => gestisciCambioCategoria("tutte")}
                   className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    categoriaAttiva === ""
+                    categoriaSlug === ""
                       ? "bg-amber-600 text-white shadow-sm"
                       : "text-slate-600 hover:bg-slate-50 hover:text-amber-700"
                   }`}
@@ -140,17 +142,17 @@ function Navbar({ tipoProdotto }) {
                 </button>
               </li>
 
-              {categorie.map((cat) => (
-                <li key={cat.slug}>
+              {categorie.map((categoria) => (
+                <li key={categoria.slug}>
                   <button
-                    onClick={() => gestisciCambioCategoria(cat.slug)}
+                    onClick={() => gestisciCambioCategoria(categoria.slug)}
                     className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                      categoriaAttiva === cat.slug
+                      categoriaSlug === categoria.slug
                         ? "bg-amber-600 text-white shadow-sm"
                         : "text-slate-600 hover:bg-slate-50 hover:text-amber-700"
                     }`}
                   >
-                    {cat.nome}
+                    {categoria.nome}
                   </button>
                 </li>
               ))}
@@ -194,10 +196,6 @@ function Navbar({ tipoProdotto }) {
         onClose={() => setIsCercaOpen(false)}
         className="relative z-50 md:hidden"
       >
-        {/* Sfondo Oscurato con transizione */}
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300" />
-
-        {/* Posizionamento del pannello di ricerca in alto sullo schermo */}
         <div className="fixed inset-x-0 top-0 p-4">
           <DialogPanel
             transition
